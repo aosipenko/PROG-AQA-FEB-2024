@@ -1,44 +1,58 @@
 package org.prog;
 
+import org.prog.cars.Ford;
+import org.prog.cars.ICar;
+import org.prog.cars.Tesla;
+
 public class Main {
 
-    /**
-     * ##########################################
-     * ######phoneOne############################
-     * ##########################################
-     * ##########################################
-     * ##########################################
-     * ####################phoneTwo##############
-     * ##########################################
-     * ##########################################
-     * ##########################################
-     *
-     * @param args
-     */
-
     public static void main(String[] args) {
-//        Phone phoneOne = new Phone();
+//        Samsung samsung = new Samsung();
+//        SamsungAndroindGenOne samsungAndroindGenOne = new SamsungAndroindGenOne();
+//        SamsungAndroindGenTwo samsungAndroindGenTwo = new SamsungAndroindGenTwo();
+//        SamsungAndroindGenThree samsungAndroindGenThree = new SamsungAndroindGenThree();
+//        SamsungAndroindGenFour samsungAndroindGenFour = new SamsungAndroindGenFour();
+//        SamsungAndroindGenFive samsungAndroindGenFive = new SamsungAndroindGenFive();
+//        SamsungAndroindGenSix samsungAndroindGenSix = new SamsungAndroindGenSix();
 //
-//        phoneOne.pressPowerButton();
+//        samsung.getResolution();
+//        samsungAndroindGenOne.getResolution();
+//        samsungAndroindGenTwo.getResolution();
+//        samsungAndroindGenThree.getResolution();
+//        samsungAndroindGenFour.getResolution();
+//        samsungAndroindGenFive.getResolution();
+//        samsungAndroindGenSix.getResolution();
+//        Tesla tesla = new Tesla();
+//        Honda honda = new Honda();
+        Ford ford = new Ford();
 //
+////        useTesla(tesla);
 //
-//        phoneOne.volumeDown();
-//        phoneOne.volumeUp();
-//        phoneOne.volumeUp();
-//        phoneOne.volumeUp();
+//        useCar(tesla);
+//        useCar(honda);
+//        useCar(ford);
 
-        Samsung samsung = new Samsung();
-        samsung.pressPowerButton();
-        samsung.volumeUp();
-        samsung.volumeUp();
-        samsung.volumeUp();
-        samsung.volumeUp();
-        samsung.scanFingerPrints();
+//        ford.driveTo("Kyiv");
+//        ford.driveTo("Kyiv", "Odessa");
+//        ford.driveTo("Kyiv", "Odessa", "Dnepr");
 
-        SamsungFold fold = new SamsungFold();
-        fold.pressPowerButton();
-        fold.volumeUp();;
-        fold.scanFingerPrints();
-        fold.foldThePhone();
+        Person person = new Person();
+
+
+        person.iWant("iPhone", "14 Pro max", "256 GB");
+        person.iWant("iPhone", "14 Pro max");
+        person.iWant("iPhone");
+        person.iWant();
     }
+
+    public static void useCar(ICar iCar) {
+        iCar.fillCar();
+        iCar.goTo();
+    }
+
+    public static void useTesla(Tesla tesla) {
+        tesla.goTo();
+        tesla.autoPilot();
+    }
+
 }

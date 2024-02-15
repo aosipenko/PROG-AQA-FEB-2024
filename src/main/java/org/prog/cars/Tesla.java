@@ -5,4 +5,13 @@ public class Tesla implements ICar {
     public void goTo() {
         System.out.println("Tesla uses electricity");
     }
+
+    @Override
+    public void fillCar() {
+        System.out.println("Tesla is charging...");
+    }
+
+    public void autoPilot() {
+        System.out.println("Tesla is driving with autopilot");
+    }
 }

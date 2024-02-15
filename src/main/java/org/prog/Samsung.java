@@ -2,8 +2,8 @@ package org.prog;
 
 public class Samsung extends Phone {
 
-    public void scanFingerPrints() {
-        System.out.println("Scan finger done!");
+    public void getResolution(){
+        System.out.println("Black and white 100x100");
     }
 
 }
