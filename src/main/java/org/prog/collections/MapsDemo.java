@@ -48,5 +48,6 @@ public class MapsDemo {
 
         ownedCars.get("Joe").add(new Car());
 
+        Object o = new Object();
     }
 }
