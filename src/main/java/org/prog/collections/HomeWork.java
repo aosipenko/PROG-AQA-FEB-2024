@@ -1,5 +1,6 @@
 package org.prog.collections;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Random;
 public class HomeWork {
 
     public static void main(String[] args) {
+
 
     }
 }
