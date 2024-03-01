@@ -90,15 +90,16 @@ public class MapsDemo {
         ownedCars.put(new Car(CarColors.GREEN), "Jane");
         ownedCars.put(new Car(CarColors.RED), "Pete");
         ownedCars.put(new Car(CarColors.BLACK), "Bob");
-        @@ -57,16 +60,28 @@ private static void printCarsByColor() {
-            ownedCars.put(new Car(CarColors.RED), "Alice");
-            ownedCars.put(new Car(CarColors.GREEN), "Alice");
+        ownedCars.put(new Car(CarColors.WHITE), "Kate");
+        ownedCars.put(new Car(CarColors.GREEN), "Bill");
+        ownedCars.put(new Car(CarColors.RED), "Alice");
+        ownedCars.put(new Car(CarColors.GREEN), "Alice");
 
-            List<Car> carWithCertainColor = new ArrayList<>();
-            Set<Car> cars = ownedCars.keySet();
-            for (Car c : cars) {
-                if (c.carColor.equals(CarColors.BLACK)) {
-                    carWithCertainColor.add(c);
+        List<Car> carWithCertainColor = new ArrayList<>();
+        Set<Car> cars = ownedCars.keySet();
+        for (Car c : cars) {
+            if (c.carColor.equals(CarColors.BLACK)) {
+                carWithCertainColor.add(c);
 //        List<Car> carWithCertainColor = new ArrayList<>();
 //        Set<Car> cars = ownedCars.keySet();
 //        for (Car c : cars) {
@@ -111,18 +112,21 @@ public class MapsDemo {
 //            System.out.println(ownedCars.get(c));
 //        }
 
-                    List<Car> ownersOfCarsWithSpecificColor = new ArrayList<>();
+                List<Car> ownersOfCarsWithSpecificColor = new ArrayList<>();
 
-                    for (var owner : ownedCars.entrySet()) {
-                        if (owner.getValue().equals("John") || owner.getValue().equals("Alice")){
-                            ownersOfCarsWithSpecificColor.add(owner.getKey());
-                        }
-                    }
-
-                    for (Car c : carWithCertainColor) {
-                        System.out.println(ownedCars.get(c));
-                        for (Car car : ownersOfCarsWithSpecificColor) {
-                            System.out.println(car.carColor);
-                        }
+                for (var owner : ownedCars.entrySet()) {
+                    if (owner.getValue().equals("John") || owner.getValue().equals("Alice")) {
+                        ownersOfCarsWithSpecificColor.add(owner.getKey());
                     }
                 }
+
+                for (Car c : carWithCertainColor) {
+                    System.out.println(ownedCars.get(c));
+                    for (Car car : ownersOfCarsWithSpecificColor) {
+                        System.out.println(car.carColor);
+                    }
+                }
+            }
+        }
+    }
+}
