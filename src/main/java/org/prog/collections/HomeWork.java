@@ -1,6 +1,8 @@
 package org.prog.collections;
 
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Write HashMap of owned cars, set their colors using enum you create
@@ -9,6 +11,5 @@ import java.util.Random;
 public class HomeWork {
 
     public static void main(String[] args) {
-
     }
 }
