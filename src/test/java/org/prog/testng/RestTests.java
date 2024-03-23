@@ -54,7 +54,7 @@ public class RestTests {
         Assert.assertEquals(dto.getResults().size(), 10);
         boolean anyFemalePresent = false;
         for (PersonDto p : dto.getResults()) {
-            if (p.getGender().equals("female")) {
+            if (p.getGender().equals("male")) {
                 anyFemalePresent = true;
                 break;
             }
