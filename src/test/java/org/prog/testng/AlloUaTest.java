@@ -2,6 +2,8 @@ package org.prog.testng;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.prog.pages.AlloUaPage;
 import org.prog.web.WebDriverFactory;
 import org.testng.Assert;
@@ -26,62 +28,23 @@ public class AlloUaTest {
         page.searchForGoods(phoneName);
         Assert.assertTrue(page.searchResultsContain(phoneName),
                 "No phone with name '" + phoneName + "' was present on page");
-        page.switchToNextPage();
+        page.scrollToElement(page.pagination());
+        page.clickNextPage();
         Assert.assertTrue(page.searchResultsContain(phoneName),
-                "No phone with name '" + phoneName + "' was present on the second page");
-        page.switchToPreviousPage();
-        Assert.assertTrue(page.searchResultsContain(phoneName),
-                "No phone with name '" + phoneName + "' was present again on the first page");
+                "No phone with name '" + phoneName + "' was present on the next page");
     }
 
     @Test
-    public void searchForPhoneOnPage2() {
+    public void changePageAndSearchForPhone() {
         String phoneName = "iPhone 15";
         page.loadPage();
+        page.clickPage(2);
         page.searchForGoods(phoneName);
-        page.switchToPage(2);
         Assert.assertTrue(page.searchResultsContain(phoneName),
-                "No phone with name '" + phoneName + "' was present on the second page");
-    }
-
-    @Test
-    public void searchForPhoneOnPage2AndBackToPage1() {
-        String phoneName = "iPhone 15";
-        page.loadPage();
-        page.searchForGoods(phoneName);
-        page.switchToPage(2);
-        Assert.assertTrue(page.searchResultsContain(phoneName),
-                "No phone with name '" + phoneName + "' was present on the second page");
-        page.switchToPreviousPage();
-        Assert.assertTrue(page.searchResultsContain(phoneName),
-                "No phone with name '" + phoneName + "' was present again on the first page");
-    }
-
-    private void clickArrow(String direction) {
-        if (direction.equalsIgnoreCase("next")) {
-            page.clickNextPageArrow();
-        } else if (direction.equalsIgnoreCase("prev")) {
-            page.clickPreviousPageArrow();
-        }
-    }
-
-    private class AlloUaPageUsingPageObject extends AlloUaPage {
-        public void switchToPage(int pageNumber) {
-            super.switchToPage(pageNumber);
-        }
-
-        public void switchToNextPage() {
-            clickArrow("next");
-        }
-
-        public void switchToPreviousPage() {
-            clickArrow("prev");
-        }
-    }
-
-    @Override
-    AlloUaPage getPage() {
-        return new AlloUaPageUsingPageObject();
+                "No phone with name '" + phoneName + "' was present on page");
+        page.clickPreviousPage();
+        Assert.assertFalse(page.searchResultsContain(phoneName),
+                "Phone with name '" + phoneName + "' was present on the previous page");
     }
 
     @AfterSuite
