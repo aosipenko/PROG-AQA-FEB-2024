@@ -1,6 +1,7 @@
 package org.prog.testng;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.prog.pages.AlloUaPage;
 import org.prog.web.WebDriverFactory;
 import org.testng.Assert;
@@ -18,9 +19,6 @@ public class AlloUaTest {
         page = new AlloUaPage(driver);
     }
 
-    //TODO: add method to page object that will switch between search pages
-    //TODO: methods: left, right and by page number
-    //TODO: test must vefiry that searched value is present on that page
     @Test
     public void searchForPhone() {
         String phoneName = "iPhone 15";
@@ -28,14 +26,63 @@ public class AlloUaTest {
         page.searchForGoods(phoneName);
         Assert.assertTrue(page.searchResultsContain(phoneName),
                 "No phone with name '" + phoneName + "' was present on page");
-        page.scrollToElement(page.pagination());
-        //add next page by clicking ">"
-        // add verifiation like line 29
+        page.switchToNextPage();
+        Assert.assertTrue(page.searchResultsContain(phoneName),
+                "No phone with name '" + phoneName + "' was present on the second page");
+        page.switchToPreviousPage();
+        Assert.assertTrue(page.searchResultsContain(phoneName),
+                "No phone with name '" + phoneName + "' was present again on the first page");
     }
 
-    //TODO: add second test where you change page by clicking "2"
+    @Test
+    public void searchForPhoneOnPage2() {
+        String phoneName = "iPhone 15";
+        page.loadPage();
+        page.searchForGoods(phoneName);
+        page.switchToPage(2);
+        Assert.assertTrue(page.searchResultsContain(phoneName),
+                "No phone with name '" + phoneName + "' was present on the second page");
+    }
 
-    //TODO: * - switch page "2" then click "<" then validate goods
+    @Test
+    public void searchForPhoneOnPage2AndBackToPage1() {
+        String phoneName = "iPhone 15";
+        page.loadPage();
+        page.searchForGoods(phoneName);
+        page.switchToPage(2);
+        Assert.assertTrue(page.searchResultsContain(phoneName),
+                "No phone with name '" + phoneName + "' was present on the second page");
+        page.switchToPreviousPage();
+        Assert.assertTrue(page.searchResultsContain(phoneName),
+                "No phone with name '" + phoneName + "' was present again on the first page");
+    }
+
+    private void clickArrow(String direction) {
+        if (direction.equalsIgnoreCase("next")) {
+            page.clickNextPageArrow();
+        } else if (direction.equalsIgnoreCase("prev")) {
+            page.clickPreviousPageArrow();
+        }
+    }
+
+    private class AlloUaPageUsingPageObject extends AlloUaPage {
+        public void switchToPage(int pageNumber) {
+            super.switchToPage(pageNumber);
+        }
+
+        public void switchToNextPage() {
+            clickArrow("next");
+        }
+
+        public void switchToPreviousPage() {
+            clickArrow("prev");
+        }
+    }
+
+    @Override
+    AlloUaPage getPage() {
+        return new AlloUaPageUsingPageObject();
+    }
 
     @AfterSuite
     public void tearDown() {
