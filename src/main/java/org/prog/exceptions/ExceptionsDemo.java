@@ -15,7 +15,10 @@ public class ExceptionsDemo {
         try {
             readFile1();
         } catch (Throwable t) {
-            System.out.println("OOPS");
+            // It's generally not recommended to catch Throwable.
+            // Catch specific exceptions instead to avoid catching errors and unexpected conditions.
+            System.out.println("Something went wrong: " + t.getMessage());
+            t.printStackTrace();
         }
         System.out.println("test");
     }
@@ -36,13 +39,21 @@ public class ExceptionsDemo {
         try {
             readFile5();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            // Handle the FileNotFoundException here, e.g., by logging a message or showing an error message.
+            System.err.println("File 'abc.txt' not found.");
+            // Rethrow the exception if you want it to be handled at a higher level.
+            // throw new RuntimeException("File 'abc.txt' not found", e);
         }
     }
 
     public static void readFile5() throws FileNotFoundException {
         File f = new File("abc.txt");
+        // You should always check if the file exists before opening a FileReader.
+        if (!f.exists()) {
+            throw new FileNotFoundException("File 'abc.txt' does not exist.");
+        }
         FileReader fileReader = new FileReader(f);
         f.setReadable(true);
     }
 }
+
