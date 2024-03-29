@@ -60,7 +60,8 @@ public class MyTestNGTest2 {
                 .get()
                 .as(ResultsDto.class);
 
-        NameDto name = dto.getResults().get(0).getName();
+        NameDto name;
+        name = dto.getResults().get(0).getName();
         return name.getFirst() + " " + name.getLast();
     }
 }
